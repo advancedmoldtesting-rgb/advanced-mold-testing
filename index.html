@@ -4,39 +4,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Advanced Mold Testing</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <img src="logo.png" alt="Advanced Mold Testing Logo" class="logo" />
-    <h1>Advanced Mold Testing</h1>
-    <p>Certified by the FL DBPR & IICRC</p>
-  </header>
 
-  <main>
-    <p>
-      We offer professional mold assessments across South Florida.
-      Third-party lab testing for fast and accurate results.
-      Call <a href="tel:3056064262">(305) 606-4262</a> or email
-      <a href="mailto:advancedmoldtesting@gmail.com">advancedmoldtesting@gmail.com</a>
-      to schedule your free inspection.
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Optional overlay for hero image */
+    .hero-bg {
+      background-image: url('hero.jpg'); 
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Language Toggle -->
+  <div class="text-right p-4">
+    <button id="enBtn" class="px-3 py-1 rounded-l bg-green-700 text-white">EN</button>
+    <button id="esBtn" class="px-3 py-1 rounded-r bg-gray-200 hover:bg-gray-300">ES</button>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero-bg h-96 flex items-center justify-center text-center text-white">
+    <div class="hero-content max-w-2xl px-4">
+      <img src="logo.png" alt="Advanced Mold Testing Logo" class="mx-auto h-20 mb-4" />
+      <h1 class="text-4xl font-bold mb-2" data-en="Advanced Mold Testing" data-es="Pruebas Avanzadas de Moho">
+        Advanced Mold Testing
+      </h1>
+      <p class="text-lg" data-en="Certified by the FL DBPR & IICRC" data-es="Certificado por FL DBPR e IICRC">
+        Certified by the FL DBPR & IICRC
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-2xl mx-auto px-4 py-10">
+    <p class="text-center mb-6 text-lg" 
+       data-en="We offer professional mold assessments across South Florida. Third-party lab testing for fast and accurate results. Call (305) 606-4262 or email advancedmoldtesting@gmail.com to schedule your free inspection." 
+       data-es="Ofrecemos evaluaciones profesionales de moho en todo el sur de Florida. Pruebas de laboratorio de terceros para resultados rápidos y precisos. Llame al (305) 606-4262 o envíe un correo a advancedmoldtesting@gmail.com para programar su inspección gratuita.">
+      We offer professional mold assessments across South Florida. Third-party lab testing for fast and accurate results. Call (305) 606-4262 or email advancedmoldtesting@gmail.com to schedule your free inspection.
     </p>
 
-    <form
-      action="https://formspree.io/f/xanpnllq"
-      method="POST"
-      class="contact-form"
-    >
-      <input type="text" name="name" placeholder="Full name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="text" name="phone" placeholder="Phone" />
-      <input type="text" name="address" placeholder="Address" />
-      <textarea
-        name="message"
-        placeholder="Describe your concern"
-      ></textarea>
-      <button type="submit">Request Inspection</button>
+    <!-- Contact Form -->
+    <form action="https://formspree.io/f/xanpnllq" method="POST" class="bg-gray-50 p-6 rounded-xl shadow space-y-4">
+      <input type="text" name="name" placeholder="Full name / Nombre completo" class="w-full p-3 border rounded-lg" required />
+      <input type="email" name="email" placeholder="Email" class="w-full p-3 border rounded-lg" required />
+      <input type="text" name="phone" placeholder="Phone / Teléfono" class="w-full p-3 border rounded-lg" />
+      <input type="text" name="address" placeholder="Address / Dirección" class="w-full p-3 border rounded-lg" />
+      <textarea name="message" placeholder="Describe your concern / Describa su problema" class="w-full p-3 border rounded-lg"></textarea>
+      <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white p-3 rounded-lg font-semibold">
+        <span data-en="Request Inspection" data-es="Solicitar Inspección">Request Inspection</span>
+      </button>
     </form>
   </main>
+
+  <script>
+    // Bilingual toggle
+    const enBtn = document.getElementById('enBtn');
+    const esBtn = document.getElementById('esBtn');
+
+    const swapLang = (lang) => {
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${lang}`);
+      });
+      if (lang === 'en') {
+        enBtn.classList.add('bg-green-700', 'text-white');
+        esBtn.classList.remove('bg-green-700', 'text-white');
+        esBtn.classList.add('bg-gray-200');
+      } else {
+        esBtn.classList.add('bg-green-700', 'text-white');
+        enBtn.classList.remove('bg-green-700', 'text-white');
+        enBtn.classList.add('bg-gray-200');
+      }
+    };
+
+    enBtn.addEventListener('click', () => swapLang('en'));
+    esBtn.addEventListener('click', () => swapLang('es'));
+
+    swapLang('en'); // default to English
+  </script>
 </body>
 </html>
+
